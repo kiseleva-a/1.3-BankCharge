@@ -10,10 +10,10 @@ fun main(args: Array<String>) {
 }
 
 
-fun calculateCharge (cardType: Int, currentMonthPreviousTransactionsSum: Double, transactionSum: Int): Double {
+fun calculateCharge (cardType: Int = 1, currentMonthPreviousTransactionsSum: Double = 0.0, transactionSum: Int): Double {
     var charge: Double = 0.0
     if (cardType == 1) { // VK Pay
-        if (transactionSum > 15000 ||  currentMonthPreviousTransactionsSum > 40000) {
+        if (transactionSum > 15000 ||  currentMonthPreviousTransactionsSum + transactionSum > 40000) {
             println("Вами был превышен лимит переводов") }
         else {
             charge = 0.0
@@ -21,7 +21,7 @@ fun calculateCharge (cardType: Int, currentMonthPreviousTransactionsSum: Double,
     }
     else if (cardType == 2 || cardType == 3) { // Mastercard и Maestro
         var masMaesCharge = transactionSum * 0.006 + 20
-        if (transactionSum > 150000 || currentMonthPreviousTransactionsSum > 600000) {
+        if (transactionSum > 150000 || currentMonthPreviousTransactionsSum + transactionSum > 600000) {
             println("Вами был превышен лимит переводов")
         } else if (currentMonthPreviousTransactionsSum > 75000 || transactionSum > 75000) {
             charge = masMaesCharge
@@ -31,7 +31,7 @@ fun calculateCharge (cardType: Int, currentMonthPreviousTransactionsSum: Double,
 
     } else if (cardType == 4 || cardType == 5) { // Visa и Мир
         var viMirCharge = transactionSum * 0.0075
-        if (transactionSum > 150000 || currentMonthPreviousTransactionsSum > 600000) {
+        if (transactionSum > 150000 || currentMonthPreviousTransactionsSum + transactionSum > 600000) {
             println("Вами был превышен лимит переводов")
         } else if (viMirCharge < 35) {
             viMirCharge = 35.0
