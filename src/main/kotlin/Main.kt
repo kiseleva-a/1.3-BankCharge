@@ -23,7 +23,7 @@ fun calculateCharge (cardType: Int = 1, currentMonthPreviousTransactionsSum: Dou
         var masMaesCharge = transactionSum * 0.006 + 20
         if (transactionSum > 150000 || currentMonthPreviousTransactionsSum + transactionSum > 600000) {
             println("Вами был превышен лимит переводов")
-        } else if (currentMonthPreviousTransactionsSum > 75000 || transactionSum > 75000) {
+        } else if (currentMonthPreviousTransactionsSum + transactionSum > 75000 || transactionSum + transactionSum > 75000) {
             charge = masMaesCharge
         } else {
             charge = 0.0
